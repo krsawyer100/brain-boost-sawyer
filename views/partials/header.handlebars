@@ -1,0 +1,12 @@
+<header>
+  <a class="site-logo" href="/">
+    Brain Boost!
+  </a>
+  {{#if isLoggedIn}}
+    <a href="/study-sets">Your Sets</a>
+    <a href="/api/logout">Logout</a>
+  {{else}}
+    <a href="/login">Login</a>
+    <a href="/signup">Sign Up</a>
+  {{/if}}
+</header>
