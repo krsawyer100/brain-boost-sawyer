@@ -15,13 +15,15 @@
                     <div class="flashcard">
                         <input type="hidden" name="flashcard_id" value="{{this.flashcard_id}}" id="{{this.flashcard_id}}">
                         <h4>Flashcard {{this.flashcard_id}}</h4>
-                        <div class="term">
-                            <label for="term">Term: </label>
-                            <input type="text" name="term" id="term" placeholder="Enter Term" required value="{{this.term}}">
-                        </div>
-                        <div class="answer">
-                            <label for="answer">Answer: </label>
-                            <input type="text" name="answer" id="answer" placeholder="Enter Answer" required value="{{this.answer}}">
+                        <div class="flashcard__inputs-container">
+                            <div class="term">
+                                <label for="term">Term: </label>
+                                <input type="text" name="term" id="term" placeholder="Enter Term" required value="{{this.term}}">
+                            </div>
+                            <div class="answer">
+                                <label for="answer">Answer: </label>
+                                <input type="text" name="answer" id="answer" placeholder="Enter Answer" required value="{{this.answer}}">
+                            </div>
                         </div>
                     </div>
                     {{/each}}
@@ -44,13 +46,15 @@
     newFlashcard.innerHTML = `
         <input type="hidden" name="flashcard_id" value="${flashcardCount}" id="${flashcardCount}">
         <h4>Flashcard ${flashcardCount}</h4>
-        <div class="term">
-            <label for="term">Term: </label>
-            <input type="text" name="term" id="term" placeholder="Enter Term" required>
-        </div>
-        <div class="answer">
-            <label for="answer">Answer: </label>
-            <input type="text" name="answer" id="answer" placeholder="Enter Answer" required>
+        <div class="flashcard__inputs-container">
+            <div class="term">
+                <label for="term">Term: </label>
+                <input type="text" name="term" id="term" placeholder="Enter Term" required>
+            </div>
+            <div class="answer">
+                <label for="answer">Answer: </label>
+                <input type="text" name="answer" id="answer" placeholder="Enter Answer" required>
+            </div>
         </div>`
     flashcardsContainer.appendChild(newFlashcard)
 })

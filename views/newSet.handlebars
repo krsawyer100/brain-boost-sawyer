@@ -4,21 +4,23 @@
         <h2>Create New Set</h2>
         <div class="create__form-container">
             <form class="create__form" action="/api/sets/create" method="POST">
-                <label class="create__title" for="title">Title</label>
-                <input class="create__title-input" type="text" name="title" id="title" placeholder="Enter Title">
-                <label class="create__description" for="description">Description</label>
+                <label class="create__title" for="title">Title:</label>
+                <input class="create__title-input" type="text" name="title" id="title" placeholder="Enter Title...">
+                <label class="create__description" for="description">Description:</label>
                 <input class="create__description-input" type="text" name="description" id="description" placeholder="(optional)">
                 <div class="create__flashcards-container">
                     <p class="create-error">{{error}}</p>
                     <div class="flashcard">
                         <h4>Flashcard 1</h4>
-                        <div class="term">
-                            <label for="term">Term: </label>
-                            <input type="text" name="term" id="term" placeholder="Enter Term" required>
-                        </div>
-                        <div class="answer">
-                            <label for="answer">Answer: </label>
-                            <input type="text" name="answer" id="answer" placeholder="Enter Answer" required>
+                        <div class="flashcard__inputs-container">
+                            <div class="term">
+                                <label for="term">Term: </label>
+                                <input type="text" name="term" id="term" placeholder="Enter Term" required>
+                            </div>
+                            <div class="answer">
+                                <label for="answer">Answer: </label>
+                                <input type="text" name="answer" id="answer" placeholder="Enter Answer" required>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,13 +41,15 @@
     newFlashcard.classList.add('flashcard')
     newFlashcard.innerHTML = `
         <h4>Flashcard ${flashcardCount}</h4>
-        <div class="term">
-            <label for="term">Term: </label>
-            <input type="text" name="term" id="term" placeholder="Enter Term" required>
-        </div>
-        <div class="answer">
-            <label for="answer">Answer: </label>
-            <input type="text" name="answer" id="answer" placeholder="Enter Answer" required>
+        <div class="flashcard__inputs-container">
+            <div class="term">
+                <label for="term">Term: </label>
+                <input type="text" name="term" id="term" placeholder="Enter Term" required>
+            </div>
+            <div class="answer">
+                <label for="answer">Answer: </label>
+                <input type="text" name="answer" id="answer" placeholder="Enter Answer" required>
+            </div>
         </div>`
     flashcardsContainer.appendChild(newFlashcard)
 })

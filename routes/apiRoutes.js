@@ -21,7 +21,6 @@ router
 router
     .route("/sets/create")
     .post(controllers.set.createSet)
-    .delete(controllers.flashcard.deleteFlashcard)
 
 router
     .route("/sets/edit/:id")
