@@ -5,9 +5,15 @@
         <h2 class="hero_subtitle">Enhance your studying with our flashcards app!</h3>
         <a class="hero_btn" href="/sets/create">New Set</a>
         {{else}}
-        <h3 class="hero_subtitle">Sign up today to enhance your studying!</h3>
+        <h2 class="hero_subtitle">Sign up today to enhance your studying!</h2>
         <a class="hero_btn" href="/signup">Signup</a>
         {{/if}}
+    </section>
+    <section class="daily-fact">
+      <div class="fact__container">
+        <h2 class="fact__title">Daily Random Fact</h2>
+
+      </div>
     </section>
     <section class="benefits">
       <h2 class="benefits_title">Flashcard Benefits</h2>
@@ -29,5 +35,40 @@
         </div>
       </div>
     </section>
+<script>
+const factContainer = document.querySelector(".fact__container")
+document.body.onload = function(e) {
+  fetchApiInfo()
+}
+
+ function fetchApiInfo() {
+  fetch('https://uselessfacts.jsph.pl/api/v2/facts/today?language=en', {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(function(res) {
+    if (res.status !== 200) {
+      throw new Error('No Data Found')
+    } else {
+      console.log(res)
+      return res.json()
+    }
+  })
+  .then(renderFact)
+  .catch(function(err) {
+    console.log(err.message)
+  })
+ }
+
+function renderFact (factData) {
+  let fact = document.createElement('h3')
+  fact.className = "fact__title"
+  fact.textContent = factData.text
+  console.log(fact)
+  factContainer.appendChild(fact)
+}
+</script>
 </main>
 {{>footer}}
