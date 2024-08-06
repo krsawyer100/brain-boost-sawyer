@@ -1,48 +1,72 @@
 const db = require("../config/connection");
 
-async function findByFlashcardId(flashcard_id) {
+async function findFlashcardById(flashcard_id) {
     const [[flashcard]] = await db.query(
-        `SELECT * FROM flashcard WHERE flashcard_id=?`,
-        flashcard_id
+        `SELECT * FROM flashcards WHERE flashcard_id=?`,
+        [flashcard_id]
     );
-    return flashcard;
+    return flashcard
 }
 
 async function getAllFlashcards(set_id) {
     const [flashcards] = await db.query(
-        `SELECT * FROM flashcard WHERE set_id=?`,
-        set_id
+        `SELECT * FROM flashcards WHERE set_id=?`,
+        [set_id]
     );
+    console.log(flashcards)
     return flashcards
 }
 
-async function createFlashcard(set_id, question, answer) {
+async function createFlashcard(set_id, term, answer) {
+    const [flashcardNumber] = await db.query(
+        `SELECT COALESCE(MAX(flashcard_id), 0) + 1 AS nextFlashcardId FROM flashcards WHERE set_id=?`,
+        [set_id]
+    )
+
+    const flashcardId = flashcardNumber[0].nextFlashcardId
+
     const [result] = await db.query(
-        `INSERT INTO flashcard (set_id, question, answer) VALUES (?, ?, ?)`, [
-            set_id, question, answer
-    ])
-    const newFlashcardId = result.insertId
-    return findByFlashcardId(newFlashcardId)
+        `INSERT INTO flashcards (flashcard_id, set_id, term, answer) VALUES (?, ?, ?, ?)`,
+        [flashcardId, set_id, term, answer]
+    );
+    
+    const newFlashcardId = result.flashcard_id
+    return findFlashcardById(newFlashcardId)
 }
 
-async function updateFlashcard(flashcard_id, question, answer) {
-    await db.query(
-        `UPDATE flashcard SET question=?, answer=? WHERE flashcard_id=?`, [
-            question, answer, flashcard_id
-    ]);
+async function updateFlashcard(set_id, flashcard_id, term, answer) {
+
+    const [existingFlashcard] = await db.query(
+        `SELECT * FROM flashcards WHERE set_id=? AND flashcard_id = ?`,
+        [set_id, flashcard_id]
+    )
+
+    if (existingFlashcard) {
+        await db.query(
+            `UPDATE flashcards SET term=?, answer=? WHERE set_id=? AND flashcard_id=?`,
+            [term, answer, set_id, flashcard_id]
+        )
+    } 
+    if (existingFlashcard.length === 0) {
+        console.log("New flash update")
+        await db.query(
+            `INSERT INTO flashcards (flashcard_id, set_id, term, answer) VALUES (?, ?, ?, ?)`,
+            [flashcard_id, set_id, term, answer]
+        )
+    }
 }
 
 async function deleteFlashcard(flashcard_id) {
     await db.query(
-        `DELETE FROM flashcard WHERE flashcard_id=?`,
+        `DELETE FROM flashcards WHERE flashcard_id=?`,
         flashcard_id
-    )
+    );
 }
 
 module.exports = {
-    findByFlashcardId,
+    findFlashcardById,
     getAllFlashcards,
     createFlashcard,
     updateFlashcard,
-    deleteFlashcard
+    deleteFlashcard,
 }

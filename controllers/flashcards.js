@@ -3,63 +3,74 @@ const { Flashcard } = require('../models')
 async function createFlashcard(req, res) {
     try {
         const { set_id } = req.params
-        const { question, answer } = req.body;
+        const { term, answer } = req.body
 
-        if (!question || !answer)
-            return res.status(400).send("question and answer required")
+        if(!term || !answer) {
+            return res.status(400).send('Term and answer required')
+        }
+        const newFlashcard = await Flashcard.createFlashcard(set_id, term, answer)
 
-        const newFlashcard = await Flashcard.create(set_id, question, answer)
+        if(!newFlashcard) {
+            return res.status(500).send('Failed to create new flashcard')
+        }
 
-        if (!newFlashcard)
-            return res.status(500).send("failed creation of flashcard")
+        return { newFlashcard }
 
-        res.status(201).json(newFlashcard)
     } catch (err) {
-        res.status(500).send(`failed to create flashcard: ${err.message}`)
+        res.status(500).send(`Failed to create flashcard: ${err.message}`)
     }
 }
 
 async function getAllFlashcards(req, res) {
     try {
-        const { set_id } = req.params
+        const { set_id } = req.params.id
 
-        if (!set_id)
-            return res.status(400).send('set not found')
+        if (!set_id) {
+            return res.status(400).send('Set not found')
+        }
 
         const flashcards = await Flashcard.getAllFlashcards(set_id)
 
-        res.json(flashcards)
+        return { flashcards }
+
     } catch (err) {
-        res.status(500).send(`failed to get flashcards: ${err.message}`)
+        res.status(500).send(`Failed to get flashcards: ${err.message}`)
     }
 }
 
 async function updateFlashcard(req, res) {
     try {
-        const { flashcard_id } = req.params
-        const { question, answer } = req.body
+        const flashcard_id = req.body.id
+        const set_id = req.params.id
+        const { term, answer } = req.body
+
+        console.log(req.params)
         
-        if (!question || !answer)
-            return res.status(400).send('question and answer required')
+        if (!term || !answer) {
+            return res.status(400).send('Term and answer required')
+        }
 
-        await Flashcard.updateFlashcard(flashcard_id, question, answer)
+        await Flashcard.updateFlashcard(set_id, flashcard_id, term, answer)
 
-        res.status(200).send('flashcard updated')
+        res.status(200).send('Flashcard updated')
     } catch (err) {
-        res.status(500).send(`faled to update: ${err.message}`)
+        res.status(500).send(`Failed to update: ${err.message}`)
     }
 }
 
 async function deleteFlashcard(req, res) {
     try {
-        const { flashcard_id } = req.params
+        const { flashcard_id } = req.body
 
-        if (!flashcard_id)
-            return res.status(400).send('flashcard not found')
-        await Flashcard.deleteById(flashcard_id)
-        res.status(200).send('flashcard deleted')
+        if (!flashcard_id) {
+            return res.status(400).send('Flashcard not found')
+        }
+
+        await Flashcard.deleteFlashcard(flashcard_id)
+
+        res.status(200).send('Flashcard deleted')
     } catch (err) {
-        res.status(500).send(`failed to delete: ${err.message}`)
+        res.status(500).send(`Failed to delete: ${err.message}`)
     }
 }
 
@@ -67,5 +78,5 @@ module.exports = {
     createFlashcard,
     getAllFlashcards,
     updateFlashcard,
-    deleteFlashcard
+    deleteFlashcard,
 }

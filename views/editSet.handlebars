@@ -1,0 +1,59 @@
+{{>header}}
+<main>
+    <section class="create">
+        <h2>Edit Your Set</h2>
+        <div class="create__form-container">
+            <form class="create__form" action="/api/sets/edit/{{StudySet.set_id}}?_method=PUT" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <label class="create__title" for="title">Title</label>
+                <input class="create__title-input" type="text" name="title" id="title" placeholder="Enter Title" value="{{StudySet.title}}">
+                <label class="create__description" for="description">Description</label>
+                <input class="create__description-input" type="text" name="description" id="description" placeholder="(optional)" value="{{StudySet.description}}">
+                <div class="create__flashcards-container">
+                    <p class="create-error">{{error}}</p>
+                    {{#each Flashcards}}
+                    <div class="flashcard">
+                        <input type="hidden" name="flashcard_id" value="{{this.flashcard_id}}" id="{{this.flashcard_id}}">
+                        <h4>Flashcard {{this.flashcard_id}}</h4>
+                        <div class="term">
+                            <label for="term">Term: </label>
+                            <input type="text" name="term" id="term" placeholder="Enter Term" required value="{{this.term}}">
+                        </div>
+                        <div class="answer">
+                            <label for="answer">Answer: </label>
+                            <input type="text" name="answer" id="answer" placeholder="Enter Answer" required value="{{this.answer}}">
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="create__btns">
+                    <button type="button" id="add-flashcard">Add Flashcard</button>
+                    <button type="submit" id="create-set">Submit Changes</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script>
+    const addFlashcardBtn = document.getElementById('add-flashcard')
+
+    addFlashcardBtn.addEventListener('click', function() {
+    const flashcardsContainer = document.querySelector(".create__flashcards-container")
+    const flashcardCount = flashcardsContainer.children.length ++
+    const newFlashcard = document.createElement('div')
+    newFlashcard.classList.add('flashcard')
+    newFlashcard.innerHTML = `
+        <input type="hidden" name="flashcard_id" value="${flashcardCount}" id="${flashcardCount}">
+        <h4>Flashcard ${flashcardCount}</h4>
+        <div class="term">
+            <label for="term">Term: </label>
+            <input type="text" name="term" id="term" placeholder="Enter Term" required>
+        </div>
+        <div class="answer">
+            <label for="answer">Answer: </label>
+            <input type="text" name="answer" id="answer" placeholder="Enter Answer" required>
+        </div>`
+    flashcardsContainer.appendChild(newFlashcard)
+})
+   </script>
+</main>
+{{>footer}}

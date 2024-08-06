@@ -1,0 +1,26 @@
+{{>header}}
+<main>
+  <section class="viewset">
+    <h2 class="viewset__title">{{StudySet.title}}</h2>
+    <h3 class="viewset__description">{{StudySet.description}}</h3>
+    <div class="viewset__btns">
+      <form action="/sets/edit/{{StudySet.set_id}}" method="GET">
+          <input type="hidden">
+          <button type="submit" class="viewset__edit-btn">Edit Set</button>
+      </form>
+      <form action="/api/sets/{{StudySet.set_id}}?_method=DELETE" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="viewset__delete-btn">Delete Set</button>
+      </form>
+    </div>
+    <div class="viewset__flashcards-container">
+      {{#each Flashcards}}
+      <div class="viewset__flashcard">
+          <p class="viewset__flashcard_term"><strong>Term:</strong> {{this.term}}</p>
+          <p class="viewset__flashcard_answer"><strong>Answer:</strong> {{this.answer}}</p>
+      </div>
+      {{/each}}
+    </div>
+  </section>
+</main>
+{{>footer}}

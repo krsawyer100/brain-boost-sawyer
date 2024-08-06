@@ -1,8 +1,33 @@
 {{> header}}
 <main>
-  {{#if isLoggedIn}}
-    <h1>Logged in</h1>
-    {{else}}
-    <h1>Not logged in</h1>
-  {{/if}}
+    <section class="hero">
+        {{#if isLoggedIn}}
+        <h2 class="hero_subtitle">Enhance your studying with our flashcards app!</h3>
+        <a class="hero_btn" href="/sets/create">New Set</a>
+        {{else}}
+        <h3 class="hero_subtitle">Sign up today to enhance your studying!</h3>
+        <a class="hero_btn" href="/signup">Signup</a>
+        {{/if}}
+    </section>
+    <section class="benefits">
+      <h2 class="benefits_title">Flashcard Benefits</h2>
+      <div class="benefits-container">
+        <div class="benefit">
+          <img class="benefit_img" src="/images/benefit-1.jpg" alt="">
+          <h4 class="benefit_subheading">Benefit #1</h4>
+          <p class="benefit_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laudantium excepturi recusandae optio eligendi magnam consequuntur sint, placeat non soluta adipisci nisi fugit ea nostrum, fugiat cum cumque in temporibus.</p>
+        </div>
+        <div class="benefit">
+          <img class="benefit_img" src="/images/benefit-2.jpg" alt="">
+          <h4 class="benefit_subheading">Benefit #2</h4>
+          <p class="benefit_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum accusamus vel, recusandae quibusdam pariatur architecto beatae, eligendi reiciendis autem, odio eum harum at id quidem sunt laboriosam enim consequatur atque.</p>
+        </div>
+        <div class="benefit">
+          <img class="benefit_img" src="/images/benefit-3.jpg" alt="">
+          <h4 class="benefit_subheading">Benefit #3</h4>
+          <p class="benefit_description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat libero unde nisi perspiciatis sit quibusdam necessitatibus nulla adipisci. Atque consequatur itaque veniam aut velit necessitatibus expedita eos temporibus magnam maxime!</p>
+        </div>
+      </div>
+    </section>
 </main>
+{{>footer}}

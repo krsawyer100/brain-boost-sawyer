@@ -1,4 +1,5 @@
 require("dotenv").config();
+const methodOverride = require('method-override')
 const express = require("express");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
@@ -29,6 +30,7 @@ app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
+app.use(methodOverride('_method'))
 
 app.use("/api", apiRoutes);
 app.use("/", htmlRoutes);

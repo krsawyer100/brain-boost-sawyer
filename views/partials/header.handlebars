@@ -1,12 +1,19 @@
-<header>
-  <a class="site-logo" href="/">
-    Brain Boost!
-  </a>
-  {{#if isLoggedIn}}
-    <a href="/study-sets">Your Sets</a>
-    <a href="/api/logout">Logout</a>
-  {{else}}
-    <a href="/login">Login</a>
-    <a href="/signup">Sign Up</a>
-  {{/if}}
+<header class="header">
+  <nav class="header__nav">
+    <a class="nav__logo" href="/">
+      Brain Boost!
+    </a>
+    {{#if isLoggedIn}}
+      <div class="nav__links-container">
+        <a class="nav__link" href="/sets/create">Add Set</a>
+        <a class="nav__link" href="/sets">Your Sets</a>
+        <a class="nav__link" href="/api/logout">Logout</a>
+      </div>
+    {{else}}
+      <div class="nav__links-container" id="nav__links_logged-in">
+        <a class="nav__link" href="/login">Login</a>
+        <a class="nav__link" href="/signup">Sign Up</a>
+      </div>
+    {{/if}}
+  </nav>
 </header>

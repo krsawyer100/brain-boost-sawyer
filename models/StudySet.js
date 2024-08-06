@@ -1,44 +1,46 @@
 const db = require("../config/connection");
 
-async function findBySetId(set_id) {
+async function findSetById(set_id) {
     const [[set]] = await db.query(
         `SELECT * FROM study_sets WHERE set_id=?`,
-        set_id
+        [set_id]
     );
-    return set;
+    return set
 }
 
-async function getAllSets() {
+async function getAllSets(user_id) {
     const [sets] = await db.query(
-        `SELECT * FROM study_sets`
-    );
+        `SELECT * FROM study_sets WHERE user_id=?`,
+        [user_id]
+    )
     return sets;
 }
 
-async function createSet(title, description) {
-    const [result] = await db.query(`INSERT INTO study_sets (title, description) VALUES (?, ?)`, [
-        title, description,
-    ])
+async function createSet(title, description, user_id) {
+    const [result] = await db.query(
+        `INSERT INTO study_sets (title, description, user_id) VALUES (?, ?, ?)`,
+        [title, description, user_id]
+    );
     const newSetId = result.insertId
-    return findBySetId(newSetId)
+    return findSetById(newSetId)
 }
 
 async function updateSet(set_id, title, description) {
     await db.query(
-        `UPDATE study_sets SET title=?, description=? WHERE set_id=?`, [
-            title, description, set_id
-    ]);
+        `UPDATE study_sets SET title=?, description=? WHERE set_id=?`,
+        [title, description, set_id]
+    );
 }
 
 async function deleteSet(set_id) {
     await db.query(
-        `Delete FROM study_sets WHERE set_id=?`, 
-        set_id
+        `DELETE FROM study_sets WHERE set_id=?`,
+        [set_id]
     );
 }
 
 module.exports = {
-    findBySetId,
+    findSetById,
     getAllSets,
     createSet,
     updateSet,

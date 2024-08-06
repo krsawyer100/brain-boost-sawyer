@@ -1,1 +1,32 @@
 {{>header}}
+<main>
+    <section class="studysets">
+        <h1 class="studysets__title">Study Sets</h1>
+        <div class="studysets__container">
+            {{#each StudySet}} 
+                <a class="studyset-container" href="/sets/{{this.set_id}}">
+                    <h3 class="studyset__title">{{this.title}}</h3>
+                    <h4 class="studyset__description">{{this.description}}</h4>
+                    <div class="studyset__btns">
+                        <form action="/sets/edit/{{this.set_id}}" method="GET">
+                            <input type="hidden">
+                            <button type="submit" class="studyset__edit-btn">Edit Set</button>
+                        </form>
+                        <form action="/api/sets/{{this.set_id}}?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="studyset__delete-btn">Delete Set</button>
+                        </form>
+                    </div>
+                </a>
+            {{else}}
+                <div class="studysets_notloggedin">
+                    <h3>No study sets found...</h3>
+                    <a href="/sets/create">Create one now!</a>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+<script>
+</script>
+</main>
+{{>footer}}
