@@ -1,7 +1,6 @@
 # Brain Boost Study Application
 **Application Link:** https://brain-boost-sawyer-6ebf05ed6f61.herokuapp.com/
 
-
 ## Project Description
 The Brain Boost Study Application is a website to help enhance a users study efficiency with study sets and flashcards. This project was initially create as a school coding assignment where I had to develop a useful application with the follow parameters: use node, express, handlebars, MySql or MongoDB, follow the MVC architectural pattern, link two data types together, and perform CRUD operations with data.
 
@@ -16,15 +15,16 @@ The Brain Boost Study Application is a website to help enhance a users study eff
 ## Demo
 Here is a demo of my project (I am logged in for the demo):
 
+[![Brain Boost Demo](https://img.youtube.com/vi/b8T-hT923EE/0.jpg)](https://www.youtube.com/watch?v=b8T-hT923EE)
 
 ## Tech Stack
-Languages:
+### Languages:
 1. HTML (in the form of handlebars)
 2. CSS
 3. Javascript
 4. Sql
 
-NPM Packages:
+### NPM Packages:
 1. bcrypt
 2. dotenv
 3. express
@@ -34,7 +34,7 @@ NPM Packages:
 7. method-override
 8. mysql2
 
-External APIs:
+### External APIs:
 1. Random Useless Facts Api (https://uselessfacts.jsph.pl/)
 
 ## Future Project Implementations
