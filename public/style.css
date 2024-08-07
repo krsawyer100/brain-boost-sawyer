@@ -205,6 +205,13 @@ a:focus {
 .benefit_description {
   margin-bottom: 15px;
 }
+.benefit_description > a {
+  font-size: calc(var(--font-size) * 1.05);
+}
+.benefit_description > a:hover, .benefit_description > a:focus {
+  font-size: calc(var(--font-size) * 1.02);
+  transition: 500ms;
+}
 
 /* Study Sets */
 .studysets {
