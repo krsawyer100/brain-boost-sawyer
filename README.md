@@ -38,9 +38,11 @@ Here is a demo of my project (I am logged in for the demo):
 1. Random Useless Facts Api (https://uselessfacts.jsph.pl/)
 
 ## Future Project Implementations
-1. When creating or editting a study set, allow to user to delete a flashcard in that menu (currently no implement for deleting a single flashcard)
+1. When creating or editing a study set, allow to user to delete a flashcard in that menu (currently no implement for deleting a single flashcard)
 2. When viewing a single set, change the flashcards to appear with just a term one at a time than can be flipped to view the answer and cycled through (like a carousel)
 3. Implement an external api that would allow me to add language translation in the creation process for individuals using it for language learning (This was planned for the inital project but I could not find one that was free)
 4. Implement an external api that would allow me to add text-to-speech for the flashcards when a user is viewing a set (This was plan B for the inital project but again, I could not find one that was free)
-5. Review code to see where I can simplify it once I am further into my programming education
-6. Lastly, I would likely change up my css to make the website look more modern (if needed)
+5. I want to go back through the application and make it more accessible to all users (screen readers, color blindness, neurodivergent)
+6. Review code to see where I can simplify it once I am further into my programming education
+7. Add in more verification through the application (i.e. confirming users want to delete a set before completing the action)
+7. Lastly, I would likely change up my css to make the website look more modern (if needed)
