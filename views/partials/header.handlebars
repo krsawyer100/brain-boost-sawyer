@@ -1,19 +1,61 @@
 <header class="header">
-  <nav class="header__nav">
+  <nav class="header__nav" role="navigation" aria-label="Nav Menu">
     <a class="nav__logo" href="/">
       Brain Boost!
     </a>
+    <button class="nav__btn" aria-expanded="false" aria-controls="nav-menu">
+      <div class="nav__btn_lines" id="line-1"></div>
+      <div class="nav__btn_lines" id="line-2"></div>
+      <div class="nav__btn_lines" id="line-3"></div>
+    </button>
     {{#if isLoggedIn}}
-      <div class="nav__links-container">
+      <div class="nav__links-container" id="nav-menu">
         <a class="nav__link" href="/sets/create">Add Set</a>
         <a class="nav__link" href="/sets">Your Sets</a>
         <a class="nav__link" href="/api/logout">Logout</a>
       </div>
     {{else}}
-      <div class="nav__links-container" id="nav__links_logged-in">
+      <div class="nav__links-container notloggedin" id="nav-menu">
         <a class="nav__link" href="/login">Login</a>
         <a class="nav__link" href="/signup">Sign Up</a>
       </div>
     {{/if}}
   </nav>
+<script>
+var navBtn = document.querySelector(".nav__btn")
+var navMenu = document.querySelector(".nav__links-container")
+var navBtnLines = document.querySelector(".nav__btn_lines")
+
+function toggleMenu() {
+    var isOpen = navMenu.classList.toggle('show-menu')
+    navBtn.setAttribute('aria-expanded', isOpen)
+    if (isOpen) {
+        navBtn.focus()
+        navBtn.style.transform = "scale(.95)"
+        navBtn.style.transform.hover = "scale(.95)"
+    } else {
+        navBtn.style.transform = "scale(1)"
+    }
+}
+
+navBtn.addEventListener("click", function(e) {
+    e.stopPropagation()
+    toggleMenu()
+    console.log(navMenu.classList)
+})
+
+document.addEventListener("click", function(e) {
+    if(navMenu.classList.contains('show-menu') && !navMenu.contains(e.target)) {
+        toggleMenu()
+        console.log("clicked")
+    }
+})
+
+document.addEventListener("keyup", function(e) {
+    if (e.key === 'Escape' && navMenu.classList.contains('show-menu')) {
+        toggleMenu()
+        console.log("clicked")
+    }
+})
+</script>
 </header>

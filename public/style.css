@@ -37,6 +37,7 @@ a {
   transition: color 200ms;
   font-size: calc(var(--font-size) * 1.10);
 }
+
 a:hover,
 a:focus {
   font-size: calc(var(--font-size) * 1.06);
@@ -50,6 +51,8 @@ a:focus {
   width: 100%;
   display: flex;
   align-items: center;
+  top: 0;
+  z-index: 1;
 }
 
 .header__nav {
@@ -72,6 +75,11 @@ a:focus {
   color: var(--text-color-light);
   transition: 500ms;
 }
+.nav__btn {
+  display: none;
+  background-color: transparent;
+  border: none;
+}
 
 .nav__links-container {
   display: flex;
@@ -80,8 +88,8 @@ a:focus {
   width: 255px;
 }
 
-#nav__links_logged-in {
-  width: 140px;
+.notloggedin {
+  width: 140px !important;
 }
 
 .nav__link {
@@ -125,10 +133,6 @@ a:focus {
   height: 500px;
   color: var(--text-color-light);
   row-gap: 50px;
-}
-
-.hero_title {
-  margin-top: -20px;
 }
 
 .hero_btn {
@@ -481,4 +485,208 @@ a:focus {
   scale: .98;
   cursor: pointer;
     transition: 500ms;
+}
+
+.login, .signup {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary);
+  padding: 20px;
+  color: var(--text-color-light);
+  justify-content: center;
+  align-items: center;
+}
+
+.login > h2, .signup > h2 {
+  margin-bottom: 50px;
+}
+
+.login__form, .signup__form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.login__form > input, .signup__form > input {
+  padding: 5px;
+  width: 200px;
+  border-radius: 5px;
+  border: none;
+}
+
+.login__form > label, .signup__form > label {
+  margin-bottom: -15px;
+}
+
+.login__btn, .signup__btn {
+  margin-top: 10px;
+  padding: 8px;
+  border: none;
+  background-color: var(--text-color-light);
+  font-size: calc(var(--font-size) * 1.1);
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.login__btn:hover, .sign__btn:hover, .login__btn:focus, .login__btn:focus {
+  transform: scale(.98);
+  cursor: pointer;
+}
+
+.login__form > input::placeholder, .signup__form > input::placeholder {
+  font-size: calc(var(--font-size) * .95);
+  font-weight: 300;
+}
+
+.login__form > input:focus, .signup__form > input:focus {
+  outline: 3px solid var(--secondary-light);
+}
+
+.login__account > a, .signup__account > a {
+  color: var(--text-color-light);
+  font-size: calc(var(--font-size) * 1.05);
+  font-weight: 500;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 900px) {
+  .benefits-container {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: calc(var(--font-size) * 2);
+  }
+  h2 {
+    font-size: calc(var(--font-size) * 1.75);
+  }
+  h3 {
+    font-size: calc(var(--font-size) * 1.25);
+  }
+  
+  .nav__logo {
+    font-size: calc(var(--font-size)* 2);
+  }
+
+  .nav__logo:hover, .nav__logo:focus {
+    font-size: calc(var(--font-size) * 1.97);
+    transition: 500ms;
+  }
+  /* Hamburger Menu */
+  .nav__btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    gap: 7px;
+  }
+  .nav__btn_lines {
+    width: 35px;
+    height: 5px;
+    border-radius: 10px;
+    background-color: var(--text-color-light);
+  }
+  .nav__links-container, .notloggedin {
+    display: none;
+    background-color: var(--text-color-light);
+    flex-direction: column;
+    position: absolute;
+    width: 100% !important;
+    visibility: visible;
+    transition: transform 100ms;
+    padding: 0;
+    top: 100px;
+    right: 0;
+  } 
+  .nav__links-container.show-menu {
+    transform: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav__link {
+    opacity: 0;
+    padding: 25px 0;
+    margin: 0;
+    text-align: center;
+    visibility: hidden;
+  }
+
+  .nav__links-container.show-menu .nav__link {
+    color: var(--secondary);
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .nav .nav__links-container.show-menu .nav__link  {
+    visibility: visible;
+  }
+    .hero {
+    flex-wrap: wrap;
+    text-align: center;
+    height: 400px;
+    }
+
+   .hero_subtitle {
+    padding: 0 20px;
+    }
+
+   .hero_btn {
+    font-size: calc(var(--font-size) * 1.05);
+    }
+
+    .hero_btn:hover, .hero_btn:focus {
+    font-size: calc(var(--font-size) * 1.02);
+    }
+    .fact__container {
+      text-align: center;
+      flex-wrap: wrap;
+    }
+    .create__flashcards-container {
+      margin-top: -20px;
+    }
+  
+    .create__form-container {
+      padding: 30px;
+    }
+  
+    .create__btns {
+      gap: 30px;
+    }
+    
+    .create__btns > button {
+      font-size: calc(var(--font-size) * 1);
+    }
+
+    .login, .signup {
+      margin: 40px 20px;
+    }
+
+}
+
+@media screen and (max-width: 360px) {
+  .nav__logo {
+    font-size: calc(var(--font-size) * 1.8);
+  }
+  .nav__btn {
+    gap: 5px;
+  }
+  .nav__btn_lines {
+    width: 30px;
+    height: 4px;
+    border-radius: 10px;
+  }
+
+  .viewset__delete-btn, .viewset__edit-btn {
+    color: var(--text-color-light);
+    font-size: calc(var(--font-size) * 1);
+  }
+
+  .create {
+    margin: 50px 20px;
+  }
 }
