@@ -16,11 +16,24 @@
     <div class="viewset__flashcards-container">
       {{#each Flashcards}}
       <div class="viewset__flashcard">
+      <div class="viewset__btns-container">
+        <form action="/api/sets/{{this.set_id}}/flashcards/{{this.flashcard_id}}?_method=DELETE" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit">Delete Card</button>
+        </form>
+      </div>
+        <div class="viewset__flashcard-front">
           <p class="viewset__flashcard_term"><strong>Term:</strong> {{this.term}}</p>
+        </div>
+        <div class="viewset__flashcard-back">
           <p class="viewset__flashcard_answer"><strong>Answer:</strong> {{this.answer}}</p>
+        </div>
       </div>
       {{/each}}
     </div>
   </section>
+<script>
+
+</script>
 </main>
 {{>footer}}

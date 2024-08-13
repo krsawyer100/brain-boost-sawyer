@@ -60,15 +60,18 @@ async function updateFlashcard(req, res) {
 
 async function deleteFlashcard(req, res) {
     try {
-        const { flashcard_id } = req.body
+        const set_id = req.params.id
+        const flashcard_id = req.params.flashcard_id
+        console.log("set id: " + set_id)
+        console.log("flashcard number: " + flashcard_id)
 
         if (!flashcard_id) {
             return res.status(400).send('Flashcard not found')
         }
 
-        await Flashcard.deleteFlashcard(flashcard_id)
+        await Flashcard.deleteFlashcard(set_id, flashcard_id)
 
-        res.status(200).send('Flashcard deleted')
+        res.status(200).redirect(`/sets/${set_id}`)
     } catch (err) {
         res.status(500).send(`Failed to delete: ${err.message}`)
     }

@@ -15,7 +15,7 @@ CREATE TABLE study_sets (
 );
 
 CREATE TABLE flashcards (
-    flashcard_id INT NOT NULL,
+    flashcard_id INT NOT NULL ON DELETE CASCADE,
     set_id INT NOT NULL,
     term TEXT NOT NULL,
     answer TEXT NOT NULL,

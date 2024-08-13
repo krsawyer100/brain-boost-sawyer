@@ -1,9 +1,9 @@
 const db = require("../config/connection");
 
-async function findFlashcardById(flashcard_id) {
+async function findFlashcardById(set_id, flashcard_id) {
     const [[flashcard]] = await db.query(
-        `SELECT * FROM flashcards WHERE flashcard_id=?`,
-        [flashcard_id]
+        `SELECT * FROM flashcards WHERE flashcard_id=? and set_id=?`,
+        [flashcard_id, set_id]
     );
     return flashcard
 }
@@ -56,10 +56,10 @@ async function updateFlashcard(set_id, flashcard_id, term, answer) {
     }
 }
 
-async function deleteFlashcard(flashcard_id) {
+async function deleteFlashcard(set_id, flashcard_id) {
     await db.query(
-        `DELETE FROM flashcards WHERE flashcard_id=?`,
-        flashcard_id
+        `DELETE FROM flashcards WHERE set_id=? AND flashcard_id=?`,
+        [set_id, flashcard_id]
     );
 }
 

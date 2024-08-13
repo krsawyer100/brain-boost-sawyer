@@ -323,7 +323,8 @@ a:focus {
   display: flex;
   gap: 20px;
   justify-content: center;
-  margin-bottom: 30px;
+  padding-bottom: 40px;
+  border-bottom: var(--secondary) solid 2px;
 }
 
 .viewset__delete-btn, .viewset__edit-btn {
@@ -343,12 +344,13 @@ a:focus {
 }
 
 .viewset__flashcards-container {
+  max-width: 1000px;
+  margin: auto;
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  padding: 50px 20px;
-  border-top: var(--secondary) solid 2px;
+  padding: 100px 50px;
 }
 
 .viewset__flashcard {

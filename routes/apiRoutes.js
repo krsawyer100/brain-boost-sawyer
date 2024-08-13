@@ -27,4 +27,8 @@ router
     .get(checkAuth, controllers.set.getSetAndFlashcards)
     .put(controllers.set.updateSet)
 
+router 
+    .route("/sets/:id/flashcards/:flashcard_id")
+    .delete (controllers.flashcard.deleteFlashcard)
+
 module.exports = router;
